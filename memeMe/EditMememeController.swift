@@ -47,6 +47,7 @@ import UIKit
         }
         
     }
+    
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -130,10 +131,7 @@ import UIKit
     }
     
    func subscribeToKeyboardNotifications() {
-    
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-    
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func unsubscribeFromKeyboardNotifications() {
