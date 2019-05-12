@@ -45,5 +45,7 @@
 	<string>needs access to your Photos</string>
 	<key>NSCameraUsageDescription</key>
 	<string>memeMe requires to access camera for taking profile picture</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>access to photo</string>
 </dict>
 </plist>

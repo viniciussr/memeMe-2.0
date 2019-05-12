@@ -37,22 +37,18 @@ import UIKit
     @IBAction func shareImage(_ sender: Any) {
         let memeImage: UIImage = generateMemedImage()
         let controller = UIActivityViewController(activityItems: [memeImage], applicationActivities: nil)
+        self.present(controller, animated: true, completion: nil)
+        
         controller.completionWithItemsHandler = {( type, ok, items, error ) in
             if ok {
                 self.save(meme: memeImage)
+                self.dismiss(animated: true, completion: nil)
             }
         }
-        self.present(controller, animated: true, completion: nil)
+        
     }
     @IBAction func cancel(_ sender: Any) {
-        
-        imagePickerView.image = nil
-        shareButton.isEnabled = false
-        topTextField.text = ""
-        bottomTextField.text = ""
-        formatPlaceHolder(textField: topTextField, defaultText: "TOP")
-        formatPlaceHolder(textField: bottomTextField, defaultText: "BOTTOM")
-    
+        self.dismiss(animated: true, completion: nil)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,7 +145,7 @@ import UIKit
     
     func keyboardWillShow(_ notification:Notification) {
         
-        if (bottomTextField.isEditing){
+        if bottomTextField.isEditing {
             view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
@@ -169,6 +165,10 @@ import UIKit
     func save(meme: UIImage) {
         // Create the meme
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: meme)
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+       
     }
     
     func generateMemedImage() -> UIImage {
@@ -185,5 +185,6 @@ import UIKit
         
         return memedImage
     }
+    
 }
 
